@@ -1,0 +1,29 @@
+# Dependências e builds
+node_modules/
+dist/
+.nuxt/
+.output/
+.data/
+.cache/
+
+# Logs
+*.log
+
+# Ambiente
+.env
+.env.*
+!.env.example
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Documentos internos (não públicos)
+AGENTS.md
+DESIGN.md
+PRODUCT.md
+alma-lab-guia-de-marca.md
+design-qa.md
+qa/
+NOTAS-INTERNAS.md
+.claude/
