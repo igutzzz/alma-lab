@@ -1,0 +1,20 @@
+/*
+ * Tailwind v4 without preflight: the reset would change the current look.
+ * site.css stays unlayered, so it wins over utilities on the same element.
+ */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "./site.css";
+@source "../../";
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-rust: var(--rust);
+  --color-ink: var(--ink);
+  --color-blue: var(--blue);
+  --color-bone: var(--bone);
+  --color-mustard: var(--mustard);
+  --color-ink-soft: var(--ink-soft);
+  --font-display: Alte, Arial, sans-serif;
+  --font-mono: Mono, "Courier New", monospace;
+}
