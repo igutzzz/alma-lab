@@ -17,8 +17,8 @@ import HalftoneFlower from './HalftoneFlower.vue'
       <HalftoneFlower />
     </div>
     <div class="hero-bottom">
-      <p>Identidade para sua marca. Clareza para seu site.<br>Presença para o que você cria.<br><b>Design, web e conteúdo — com um ponto de vista.</b></p>
-      <a class="button dark" href="#projetos">Conheça os projetos <span>↘</span></a>
+      <p>Identidade, site e imagem feitos pelas mesmas mãos,<br>do primeiro rascunho ao arquivo final.<br><b>Com opinião em cada etapa.</b></p>
+      <a class="button dark" href="#projetos">Ver os projetos <span>↘</span></a>
     </div>
   </section>
 </template>

@@ -31,7 +31,7 @@ export default defineNuxtConfig({
         {
           name: 'description',
           content:
-            'Alma Lab: design com personalidade, sites, experiências digitais e conteúdo visual. Conheça o trabalho e prepare seu briefing.',
+            'Alma Lab é um estúdio independente de identidade visual, sites e imagem. Veja os projetos e monte seu briefing.',
         },
       ],
     },

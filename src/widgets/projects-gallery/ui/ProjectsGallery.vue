@@ -35,7 +35,7 @@ onBeforeUnmount(() => clearTimeout(timer))
   <section id="projetos" class="projects section">
     <div class="section-heading">
       <div><h2>Do nosso<br>universo.</h2></div>
-      <p>Identidades, interfaces e experimentos.<br>Veja como uma intenção se transforma<br>em escolhas de design.</p>
+      <p>Uma identidade de verdade e cinco estudos.<br>Abra qualquer um para ver o raciocínio,<br>não só a imagem final.</p>
     </div>
     <ProjectFilters :active="filter" @change="changeFilter" />
     <p class="sr-only" role="status">{{ visible.length }} projetos em {{ displayFilter.toLowerCase() }}</p>
@@ -58,6 +58,6 @@ onBeforeUnmount(() => clearTimeout(timer))
         </button>
       </article>
     </div>
-    <p class="gallery-note">Trabalhos da marca e estudos independentes, identificados em cada projeto. Conceitos apresentados sem vínculo com clientes.</p>
+    <p class="gallery-note">Cada card diz o que é: projeto da marca ou estudo. Nenhum estudo foi feito para cliente.</p>
   </section>
 </template>

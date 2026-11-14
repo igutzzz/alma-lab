@@ -7,10 +7,10 @@ import { contact } from '~/shared/config'
   <section id="orcamento" class="contact section">
     <div class="brief-grid">
       <div>
-        <h2>Vamos dar<br>forma à sua<br>próxima ideia?</h2>
-        <p>Pode ser um começo, uma mudança ou uma ideia ainda solta.<br>Conte o contexto. Vamos partir dele.</p>
+        <h2>Por onde<br>a gente<br>começa?</h2>
+        <p>Marca nova, site que envelheceu ou só uma vontade sem forma.<br>Qualquer ponto de partida serve. Conte o contexto.</p>
         <p v-if="contact.email" class="contact-note">Contato: <a :href="`mailto:${contact.email}`">{{ contact.email }}</a></p>
-        <p v-else class="contact-note">O contato direto estará disponível em breve. Enquanto isso, organize sua ideia em um briefing e leve o texto com você.</p>
+        <p v-else class="contact-note">O e-mail do estúdio ainda não está no ar. Enquanto isso, monte seu briefing aqui e guarde o texto.</p>
       </div>
       <BriefForm />
     </div>

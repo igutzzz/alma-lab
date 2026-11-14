@@ -14,13 +14,13 @@ function generate(e: Event) {
 function invalidate() {
   if (!brief.value) return
   brief.value = ''
-  status.value = 'Você alterou o projeto. Prepare o briefing novamente.'
+  status.value = 'Você mudou algo no formulário. Prepare o briefing de novo.'
 }
 
 async function copy() {
   try {
     await navigator.clipboard.writeText(brief.value)
-    status.value = 'Briefing copiado. Você pode compartilhar pelo canal de sua preferência.'
+    status.value = 'Briefing copiado. Cole onde preferir.'
   } catch {
     status.value = 'Não foi possível copiar automaticamente. Selecione o texto abaixo ou baixe o arquivo.'
   }
@@ -28,7 +28,7 @@ async function copy() {
 
 function download() {
   downloadBrief(brief.value)
-  status.value = 'Download solicitado. Nenhuma informação foi enviada.'
+  status.value = 'Arquivo baixado. Nada foi enviado.'
 }
 
 const mailto = () =>

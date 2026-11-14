@@ -18,7 +18,7 @@ const open = ref(false)
       <div class="service-panel-inner">
         <div class="service-copy">
           <p>{{ desc }}</p>
-          <a href="#orcamento">Vamos definir o escopo <span aria-hidden="true">↗</span></a>
+          <a href="#orcamento">Conversar sobre isso <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </div>
