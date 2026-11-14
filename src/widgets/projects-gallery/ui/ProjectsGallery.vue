@@ -44,15 +44,16 @@ onBeforeUnmount(() => clearTimeout(timer))
       :key="displayFilter"
       :class="`project-grid ${displayFilter === 'Todos' ? 'is-all' : ''} ${filtering ? 'is-filtering' : ''}`"
     >
-      <article v-for="(p, i) in visible" :key="p.id" :class="`project project-${p.visual}`" :style="{ '--order': i }">
+      <article v-for="(p, i) in visible" :key="p.id" :class="`project project--${p.visual}`" :style="{ '--order': i }">
         <button class="project-link" :aria-label="`Ver projeto ${p.title}`" @click="emit('select', p)">
           <div class="project-image"><ProjectPreview :kind="p.visual" /></div>
           <div class="project-info">
-            <div>
-              <span class="eyebrow">{{ p.category }} / {{ p.type }}</span>
-              <h3>{{ p.title }}</h3>
+            <div class="project-meta">
+              <span>{{ p.category }} / {{ p.type }}</span>
+              <span class="project-index">/{{ p.year }}</span>
             </div>
-            <span class="project-index">/{{ p.year }}</span>
+            <h3>{{ p.title }}</h3>
+            <p class="project-subtitle">{{ p.subtitle }}</p>
           </div>
         </button>
       </article>

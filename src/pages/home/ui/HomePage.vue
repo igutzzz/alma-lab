@@ -6,6 +6,7 @@ import { AboutSection } from '~/widgets/about'
 import { CaseDialog } from '~/widgets/case-dialog'
 import { ContactSection } from '~/widgets/contact'
 import { HeroSection } from '~/widgets/hero'
+import { IntroLoader } from '~/widgets/intro'
 import { ProjectsGallery } from '~/widgets/projects-gallery'
 import { ServicesSection } from '~/widgets/services'
 import { SiteFooter } from '~/widgets/site-footer'
@@ -17,6 +18,7 @@ useReveal()
 </script>
 
 <template>
+  <IntroLoader />
   <a class="skip" href="#conteudo">Pular para o conteúdo</a>
   <SiteHeader />
   <main id="conteudo">

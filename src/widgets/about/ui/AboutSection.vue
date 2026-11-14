@@ -1,6 +1,17 @@
 <template>
   <section id="sobre" class="about section">
-    <div><h2>Inquieta por<br>natureza.<br><em>Humana por<br>escolha.</em></h2></div>
+    <div>
+      <h2>Inquieta por<br>natureza.<br><em>Humana por<br>escolha.</em></h2>
+      <svg class="seal" viewBox="0 0 240 160" role="img" aria-label="Selo Alma Lab, creative studio, est. 2026">
+        <ellipse cx="120" cy="80" rx="116" ry="76" />
+        <ellipse cx="120" cy="80" rx="104" ry="64" />
+        <text x="120" y="48" class="seal-name">alma lab</text>
+        <text x="40" y="86" class="seal-side">EST.</text>
+        <text x="200" y="86" class="seal-side">2026</text>
+        <text x="120" y="124" class="seal-foot">CREATIVE STUDIO</text>
+        <path class="seal-star" d="M120 64v32M106 72l28 16M106 88l28-16" />
+      </svg>
+    </div>
     <div class="about-text">
       <p class="manifesto" lang="en">Raw in attitude.<br>Precise in execution.</p>
       <p class="manifesto-support">instinto cultural com <b>construção precisa.</b></p>

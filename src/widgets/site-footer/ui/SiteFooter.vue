@@ -3,10 +3,12 @@ const year = new Date().getFullYear()
 </script>
 
 <template>
-  <footer>
-    <a class="wordmark" href="#inicio">alma lab.</a>
-    <span>IDEIAS PRECISAM DE ALMA.</span>
-    <span>© {{ year }} ALMA LAB</span>
-    <a href="#inicio">Voltar ao topo ↑</a>
+  <footer class="site-footer">
+    <div class="footer-row">
+      <span>IDEIAS PRECISAM DE ALMA.</span>
+      <span>© {{ year }} ALMA LAB</span>
+      <a class="footer-top" href="#inicio">Voltar ao topo ↑</a>
+    </div>
+    <a class="footer-mark" href="#inicio" aria-label="Alma Lab, voltar ao início">alma lab.</a>
   </footer>
 </template>

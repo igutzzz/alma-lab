@@ -1,0 +1,355 @@
+/*
+ * feat/new-style — loaded after site.css so it wins on equal specificity.
+ * Refs, translated into the brand: yeahright (intro counter), bitwip (photo tile inside the headline),
+ * donut (bitmap symbol + giant footer mark), extrafazant (marquee, wavy link), endcap (staggered work grid).
+ */
+:root {
+  --smoke: #817a70;
+  --intro-delay: 1.45s;
+}
+
+/* Paper grain over everything, like print. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.14;
+  mix-blend-mode: multiply;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .09 0 0 0 0 .08 0 0 0 0 .07 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Intro: ink sheet, rust counter, lifts away. CSS-only so it never blocks without JS. */
+@property --n {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--ink);
+  color: var(--bone);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px 4.6%;
+  animation: intro-lift 0.75s 1.1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+.intro-label {
+  font: 11px/1 Mono, monospace;
+  letter-spacing: 0.02em;
+}
+.intro-count {
+  font: 700 clamp(140px, 30vw, 440px) / 0.78 Alte, Arial, sans-serif;
+  letter-spacing: -0.06em;
+  color: var(--rust);
+  counter-reset: n var(--n);
+  animation: intro-count 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  margin-left: -0.05em;
+}
+.intro-count::after {
+  content: counter(n);
+}
+@keyframes intro-count {
+  to { --n: 100; }
+}
+@keyframes intro-lift {
+  to { transform: translateY(-100%); visibility: hidden; }
+}
+
+/* Sticky header; the paper extends past the inset rule to the screen edges. */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  box-shadow: 0 0 0 100vmax var(--paper);
+  clip-path: inset(0 -100vmax);
+}
+
+/* Hero: bigger type, a photo tile set inside the headline, bitmap flower. */
+.hero h1 {
+  font-size: clamp(78px, 11.4vw, 178px);
+  line-height: 0.86;
+  margin: 28px 0 40px;
+}
+.title-line > span { animation-delay: var(--intro-delay); }
+.title-line:nth-child(2) > span { animation-delay: calc(var(--intro-delay) + 0.09s); }
+.title-line:nth-child(3) > span { animation-delay: calc(var(--intro-delay) + 0.18s); }
+.hero .halftone {
+  transform: none;
+  aspect-ratio: 1;
+  color: var(--blue);
+  animation: halftone-in 1.2s calc(var(--intro-delay) + 0.1s) var(--ease-out) both;
+}
+.halftone img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  transform: rotate(-8deg);
+  transition: opacity 0.4s;
+}
+.halftone canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.halftone.is-ready img { opacity: 0; }
+@keyframes halftone-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-bottom { animation-delay: calc(var(--intro-delay) + 0.3s); }
+
+/* Traits as a slow marquee; the flower is the separator. */
+.traits {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 20px 0 24px;
+  font-size: clamp(34px, 4.6vw, 72px);
+}
+.traits-track {
+  display: flex;
+  flex-shrink: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: marquee 38s linear infinite;
+}
+.traits-track li {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  padding-right: 0.4em;
+}
+.traits-track li:nth-child(even) { color: var(--bone); }
+.traits .flower-mark {
+  width: 0.62em;
+  height: 0.62em;
+  fill: var(--mustard);
+  animation: spin 12s linear infinite;
+}
+.traits:hover .traits-track,
+.traits:hover .flower-mark { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-100%); } }
+@keyframes spin { to { transform: rotate(1turn); } }
+
+/*
+ * Work: staggered columns. Each study is a printed sheet laid slightly askew on a panel
+ * tinted from the palette; it straightens when you reach for it.
+ */
+.projects h2 {
+  font-size: clamp(56px, 8.4vw, 130px);
+  line-height: 0.9;
+}
+.project--landing,
+.project--dashboard,
+.project--schedule,
+.project--motion { --panel: var(--bone); --tilt: -1.6deg; }
+.project--landing { --panel: color-mix(in srgb, var(--mustard) 34%, var(--paper)); }
+.project--dashboard { --panel: color-mix(in srgb, var(--blue) 24%, var(--paper)); --tilt: 1.4deg; }
+.project--schedule { --panel: color-mix(in srgb, var(--rust) 24%, var(--paper)); --tilt: 1.2deg; }
+.project--motion { --panel: var(--ink); --tilt: -1deg; }
+.project--landing .project-image,
+.project--dashboard .project-image,
+.project--schedule .project-image,
+.project--motion .project-image {
+  padding: 6.5%;
+  background: var(--panel);
+  transition: background 0.5s var(--ease-out);
+}
+.project--motion .project-image { padding: 4.5% 12%; }
+.project--landing .project-image > div,
+.project--dashboard .project-image > div,
+.project--schedule .project-image > div,
+.project--motion .project-image > div {
+  transform: rotate(var(--tilt));
+  overflow: hidden;
+  box-shadow: 0 22px 38px -24px color-mix(in srgb, var(--ink) 70%, transparent), 0 1px 2px color-mix(in srgb, var(--ink) 25%, transparent);
+  transition: transform 0.7s var(--ease-out), box-shadow 0.7s var(--ease-out);
+}
+.project-link:hover .project-image > div,
+.project-link:focus-visible .project-image > div {
+  transform: rotate(0) translateY(-6px) scale(1.015);
+  box-shadow: 0 34px 50px -26px color-mix(in srgb, var(--ink) 75%, transparent), 0 1px 2px color-mix(in srgb, var(--ink) 25%, transparent);
+}
+.project-link:hover .project-image { background: color-mix(in srgb, var(--panel) 88%, var(--ink)); }
+.project--motion .project-link:hover .project-image { background: var(--panel); }
+
+.project-info {
+  display: block;
+  padding-top: 18px;
+  border-top: 1px solid var(--ink);
+  margin-top: 14px;
+}
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font: 11px/1.4 Mono, monospace;
+  color: var(--smoke);
+  margin-bottom: 10px;
+}
+.project-meta .project-index { padding: 0; color: var(--ink); }
+.project-info h3 {
+  font-size: clamp(28px, 2.9vw, 44px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.project-subtitle {
+  font: 12px/1.7 Mono, monospace;
+  color: var(--ink-soft);
+  margin-top: 10px;
+  max-width: 44ch;
+}
+.project-grid.is-all .project:first-child .project-info,
+.project-grid.is-all .project:last-child .project-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 25px;
+  align-items: end;
+}
+.project-grid.is-all .project:first-child .project-meta,
+.project-grid.is-all .project:last-child .project-meta { grid-column: 1 / -1; }
+.project-grid.is-all .project:first-child .project-subtitle,
+.project-grid.is-all .project:last-child .project-subtitle { justify-self: end; text-align: right; }
+
+/* Services: big index-like titles. */
+.services h2 {
+  font-size: clamp(56px, 7.6vw, 118px);
+  line-height: 0.92;
+}
+.service-title {
+  font-size: clamp(34px, 5.2vw, 82px);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+.service-trigger { padding: 26px 0 30px; }
+.service-trigger:hover .service-title { color: var(--mustard); }
+.service-trigger .service-tag {
+  justify-self: end;
+  text-align: right;
+  padding-right: 20px;
+}
+
+/* About: stamped seal under the statement. */
+.about h2 {
+  font-size: clamp(56px, 7.2vw, 112px);
+  line-height: 0.92;
+}
+.seal {
+  display: block;
+  width: clamp(150px, 15vw, 220px);
+  margin-top: 56px;
+  transform: rotate(-9deg);
+  color: var(--rust);
+}
+.seal ellipse { fill: none; stroke: currentColor; stroke-width: 2.5; }
+.seal text { fill: currentColor; text-anchor: middle; }
+.seal-name { font: 700 30px Alte, Arial, sans-serif; letter-spacing: -1px; }
+.seal-side,
+.seal-foot { font: 500 11px Mono, monospace; letter-spacing: 0.14em; }
+.seal-star { stroke: currentColor; stroke-width: 5; stroke-linecap: round; }
+
+/* Contact. */
+.contact h2 {
+  font-size: clamp(52px, 6.6vw, 104px);
+  line-height: 0.92;
+}
+.contact-note a,
+.footer-top {
+  text-decoration: underline wavy var(--mustard) 1.5px;
+  text-underline-offset: 6px;
+}
+
+/* Footer: giant wordmark cut by the page edge. */
+.site-footer {
+  display: block;
+  padding: 40px 4.6% 0;
+  overflow: hidden;
+  background: var(--paper);
+}
+.site-footer .footer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font: 11px Mono, monospace;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--ink);
+}
+.site-footer .footer-top {
+  font-size: 11px;
+  text-decoration-color: var(--rust);
+}
+.site-footer .footer-top::after,
+.site-footer .footer-mark::after { display: none; }
+.site-footer .footer-mark {
+  display: block;
+  font: 700 25vw / 0.74 Alte, Arial, sans-serif;
+  letter-spacing: -0.075em;
+  color: var(--rust);
+  margin: 0.08em 0 -0.13em -0.04em;
+  white-space: nowrap;
+  transition: letter-spacing 0.8s var(--ease-out);
+}
+.site-footer .footer-mark:hover { letter-spacing: -0.06em; }
+
+@media (min-width: 801px) {
+  .project-grid.is-all .project:nth-child(odd):not(:first-child):not(:last-child) { translate: 0 110px; }
+  .project-grid.is-all .project:last-child { margin-top: 110px; }
+}
+@media (min-width: 1500px) {
+  .traits { padding-left: 0; padding-right: 0; }
+  .site-footer {
+    padding-left: calc((100% - 1600px) / 2 + 73.6px);
+    padding-right: calc((100% - 1600px) / 2 + 73.6px);
+  }
+  .site-footer .footer-mark { font-size: min(25vw, 400px); }
+}
+@media (max-width: 800px) {
+  .service-trigger { grid-template-columns: 90% 10%; }
+  .service-trigger .service-tag { display: none; }
+}
+@media (max-width: 560px) {
+  .project-grid.is-all .project:first-child .project-info,
+  .project-grid.is-all .project:last-child .project-info { display: block; }
+  .project-grid.is-all .project:first-child .project-subtitle,
+  .project-grid.is-all .project:last-child .project-subtitle { text-align: left; }
+  .project--motion .project-image,
+  .project--landing .project-image,
+  .project--dashboard .project-image,
+  .project--schedule .project-image { padding: 4%; }
+  .hero h1 { font-size: 19.5vw; margin: 22px 0 16px; }
+  .hero .halftone {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 78%;
+    margin: -10px -24% 0 auto;
+  }
+  .traits { padding: 14px 0 16px; font-size: 34px; }
+  .service-title { font-size: 32px; }
+  .seal { width: 130px; margin-top: 30px; }
+  .site-footer .footer-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 10px;
+  }
+  .site-footer .footer-row span:first-child { grid-column: 1 / -1; }
+  .site-footer .footer-top { text-align: right; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --intro-delay: 0s; }
+  .intro,
+  .traits-track[aria-hidden] { display: none; }
+  .traits-track { flex-wrap: wrap; gap: 0 0.2em; padding: 0 4.6%; }
+}
